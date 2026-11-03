@@ -16,7 +16,15 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
 
-    - name: Download and Setup Gradle Manually
+    - name: Setup Android SDK
+      uses: android-actions/setup-android@v3
+
+    - name: Install SDK Platforms and Tools
+      run: |
+        yes | sdkmanager --licenses || true
+        sdkmanager "platforms;android-34" "build-tools;34.0.0"
+
+    - name: Download and Setup Gradle
       run: |
         wget https://services.gradle.org/distributions/gradle-8.5-bin.zip
         unzip -q gradle-8.5-bin.zip
