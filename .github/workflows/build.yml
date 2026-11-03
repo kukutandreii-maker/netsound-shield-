@@ -16,24 +16,16 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
 
-    - name: Setup Android SDK
-      uses: android-actions/setup-android@v3
-
-    - name: Install SDK Platforms and Tools
-      run: |
-        yes | sdkmanager --licenses || true
-        sdkmanager "platforms;android-34" "build-tools;34.0.0"
-
-    - name: Download and Setup Gradle
+    - name: Download Gradle 8.5
       run: |
         wget https://services.gradle.org/distributions/gradle-8.5-bin.zip
         unzip -q gradle-8.5-bin.zip
         echo "$PWD/gradle-8.5/bin" >> $GITHUB_PATH
 
-    - name: Build APK
+    - name: Build APK with Gradle
       run: gradle assembleDebug --no-daemon
 
-    - name: Upload APK
+    - name: Upload APK Artifact
       uses: actions/upload-artifact@v4
       with:
         name: NetSoundShield-GameBooster
