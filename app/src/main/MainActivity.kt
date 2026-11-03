@@ -1,23 +1,29 @@
-name: Build Android APK
+package com.netsound.shield
 
-on:
-  push:
-    branches: [ "main" ]
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
+import androidx.compose.ui.Modifier
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v3
-    - name: Set up JDK 17
-      uses: actions/setup-java@v3
-      with:
-        java-version: '17'
-        distribution: 'temurin'
-    - name: Build APK
-      run: ./gradlew assembleDebug
-    - name: Upload APK
-      uses: actions/upload-artifact@v3
-      with:
-        name: NetSoundShield-GameBooster
-        path: app/build/outputs/apk/debug/app-debug.apk
+class MainActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContent {
+            MaterialTheme {
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.background
+                ) {
+                    Box(modifier = Modifier.fillMaxSize()) {
+                        Text(text = "NetSound Shield Active")
+                    }
+                }
+            }
+        }
+    }
+}
