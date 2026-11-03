@@ -19,11 +19,8 @@ jobs:
     - name: Build with Gradle
       run: gradle assembleDebug
 
-    - name: Upload APK Artifact
+    - name: Upload APK
       uses: actions/upload-artifact@v3
       with:
         name: NetSoundShield-GameBooster
-        path: |
-          app/build/outputs/apk/debug/app-debug.apk
-          app/build/outputs/apk/debug/*.apk
-          **/*.apk
+        path: app/build/outputs/apk/debug/app-debug.apk
